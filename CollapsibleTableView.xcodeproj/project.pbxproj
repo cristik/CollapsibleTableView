@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F58B7DC1CA3322F003E9B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58B7DB1CA3322F003E9B6F /* AppDelegate.swift */; };
-		0F58B7DE1CA3322F003E9B6F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58B7DD1CA3322F003E9B6F /* MasterViewController.swift */; };
+		0F58B7DE1CA3322F003E9B6F /* CollapsibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58B7DD1CA3322F003E9B6F /* CollapsibleTableViewController.swift */; };
 		0F58B7E01CA3322F003E9B6F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58B7DF1CA3322F003E9B6F /* DetailViewController.swift */; };
 		0F58B7E31CA3322F003E9B6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F58B7E11CA3322F003E9B6F /* Main.storyboard */; };
 		0F58B7E51CA3322F003E9B6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F58B7E41CA3322F003E9B6F /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 /* Begin PBXFileReference section */
 		0F58B7D81CA3322F003E9B6F /* CollapsibleTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollapsibleTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F58B7DB1CA3322F003E9B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0F58B7DD1CA3322F003E9B6F /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		0F58B7DD1CA3322F003E9B6F /* CollapsibleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewController.swift; sourceTree = "<group>"; };
 		0F58B7DF1CA3322F003E9B6F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0F58B7E21CA3322F003E9B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F58B7E41CA3322F003E9B6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				0F58B7DB1CA3322F003E9B6F /* AppDelegate.swift */,
-				0F58B7DD1CA3322F003E9B6F /* MasterViewController.swift */,
+				0F58B7DD1CA3322F003E9B6F /* CollapsibleTableViewController.swift */,
 				0F58B7DF1CA3322F003E9B6F /* DetailViewController.swift */,
 				0F58B7E11CA3322F003E9B6F /* Main.storyboard */,
 				0F58B7E41CA3322F003E9B6F /* Assets.xcassets */,
@@ -260,7 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F58B7E01CA3322F003E9B6F /* DetailViewController.swift in Sources */,
-				0F58B7DE1CA3322F003E9B6F /* MasterViewController.swift in Sources */,
+				0F58B7DE1CA3322F003E9B6F /* CollapsibleTableViewController.swift in Sources */,
 				0F58B7DC1CA3322F003E9B6F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +488,7 @@
 				0F58B8041CA3322F003E9B6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F58B8051CA3322F003E9B6F /* Build configuration list for PBXNativeTarget "CollapsibleTableViewTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +497,7 @@
 				0F58B8071CA3322F003E9B6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F58B8081CA3322F003E9B6F /* Build configuration list for PBXNativeTarget "CollapsibleTableViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +506,7 @@
 				0F58B80A1CA3322F003E9B6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
