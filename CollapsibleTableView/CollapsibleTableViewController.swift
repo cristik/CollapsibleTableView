@@ -8,16 +8,6 @@
 
 import UIKit
 
-class Setting: NSObject {
-    let name: String
-    let subsettings: [Setting]
-    
-    init(name: String, subsettings: [Setting] = []) {
-        self.name = name
-        self.subsettings = subsettings
-    }
-}
-
 class CollapsibleTableViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
@@ -36,14 +26,18 @@ class CollapsibleTableViewController: UITableViewController {
     // workaround
     var expandedSettings = [Setting]()
     var actualSettings = [Setting]()
+    var images = [Setting:UIImage]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        actualSettings = settings;
+        actualSettings = settings
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        // TODO: view model holding the cell class, in case we have two types of cells
+        // TODO: awesome registration from articles, with enums
+        tableView.registerClass(CollapsibleTableViewCell.self, forCellReuseIdentifier: "CollapsibleTableViewCell")
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -80,20 +74,9 @@ class CollapsibleTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.selectionStyle = .None;
-        
+        let cell = (tableView.dequeueReusableCellWithIdentifier("CollapsibleTableViewCell", forIndexPath: indexPath) as? CollapsibleTableViewCell) ?? CollapsibleTableViewCell()
         let setting = actualSettings[indexPath.row]
-        cell.textLabel!.text = setting.name
-        if setting.subsettings.count == 0 {
-            var insets = cell.layoutMargins
-            insets.left = 50
-            cell.layoutMargins = insets
-        } else {
-            var insets = cell.layoutMargins
-            insets.left = 0
-            cell.layoutMargins = insets
-        }
+        cell.configure(setting.name, imageName: setting.imageName, hasChildren: setting.subsettings.count > 0)        
         return cell
     }
     
@@ -121,36 +104,3 @@ class CollapsibleTableViewController: UITableViewController {
         //        }
     }
 }
-
-
-func diff<Element>(array: [Element], other: [Element], equals: (Element, Element) -> Bool) -> (added: [Int], deleted: [Int], moved: [(from: Int, to: Int)]) {
-    var added: [Int] = []
-    var deleted: [Int] = []
-    var moved: [(from: Int, to: Int)] = []
-    for (i, item) in array.enumerate() {
-        if let j = other.indexOf({equals($0, item)}) {
-            if i != j {
-                moved.append((from: i, to: j))
-            }
-        } else {
-            deleted.append(i)
-        }
-    }
-    for (i, item) in other.enumerate() {
-        if array.indexOf({equals($0, item)}) == nil {
-            added.append(i)
-        }
-    }
-    return (added: added, deleted: deleted, moved: moved)
-}
-
-
-func diff<Element: Equatable>(array: [Element], other: [Element]) -> (added: [Int], deleted: [Int], moved: [(from: Int, to: Int)]) {
-    return diff(array, other: other, equals: ==)
-}
-
-
-//func diff<Element: AnyObject>(array: [Element], array: [Element], other: [Element]) -> (added: [Int], deleted: [Int], moved: [(from: Int, to: Int)]) {
-//    return diff(array, other: other, equals: ===)
-//}
-

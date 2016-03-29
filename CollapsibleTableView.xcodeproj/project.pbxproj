@@ -15,6 +15,9 @@
 		0F58B7E81CA3322F003E9B6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F58B7E61CA3322F003E9B6F /* LaunchScreen.storyboard */; };
 		0F58B7F31CA3322F003E9B6F /* CollapsibleTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58B7F21CA3322F003E9B6F /* CollapsibleTableViewTests.swift */; };
 		0F58B7FE1CA3322F003E9B6F /* CollapsibleTableViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58B7FD1CA3322F003E9B6F /* CollapsibleTableViewUITests.swift */; };
+		0F61514D1CAABCAE00128A9D /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61514C1CAABCAE00128A9D /* Setting.swift */; };
+		0F61514F1CAABDFF00128A9D /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61514E1CAABDFF00128A9D /* CollapsibleTableViewCell.swift */; };
+		0F6151551CAABF2400128A9D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6151541CAABF2400128A9D /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		0F58B7F91CA3322F003E9B6F /* CollapsibleTableViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollapsibleTableViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F58B7FD1CA3322F003E9B6F /* CollapsibleTableViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewUITests.swift; sourceTree = "<group>"; };
 		0F58B7FF1CA3322F003E9B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F61514C1CAABCAE00128A9D /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		0F61514E1CAABDFF00128A9D /* CollapsibleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewCell.swift; sourceTree = "<group>"; };
+		0F6151541CAABF2400128A9D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +105,10 @@
 		0F58B7DA1CA3322F003E9B6F /* CollapsibleTableView */ = {
 			isa = PBXGroup;
 			children = (
-				0F58B7DB1CA3322F003E9B6F /* AppDelegate.swift */,
-				0F58B7DD1CA3322F003E9B6F /* CollapsibleTableViewController.swift */,
-				0F58B7DF1CA3322F003E9B6F /* DetailViewController.swift */,
-				0F58B7E11CA3322F003E9B6F /* Main.storyboard */,
-				0F58B7E41CA3322F003E9B6F /* Assets.xcassets */,
-				0F58B7E61CA3322F003E9B6F /* LaunchScreen.storyboard */,
-				0F58B7E91CA3322F003E9B6F /* Info.plist */,
+				0F6151501CAABE1000128A9D /* Model */,
+				0F6151511CAABE1600128A9D /* View */,
+				0F6151521CAABE1A00128A9D /* Controller */,
+				0F6151531CAABE3500128A9D /* Other */,
 			);
 			path = CollapsibleTableView;
 			sourceTree = "<group>";
@@ -126,6 +129,44 @@
 				0F58B7FF1CA3322F003E9B6F /* Info.plist */,
 			);
 			path = CollapsibleTableViewUITests;
+			sourceTree = "<group>";
+		};
+		0F6151501CAABE1000128A9D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F61514C1CAABCAE00128A9D /* Setting.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0F6151511CAABE1600128A9D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F61514E1CAABDFF00128A9D /* CollapsibleTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0F6151521CAABE1A00128A9D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0F58B7DD1CA3322F003E9B6F /* CollapsibleTableViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		0F6151531CAABE3500128A9D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				0F6151541CAABF2400128A9D /* Utils.swift */,
+				0F58B7DB1CA3322F003E9B6F /* AppDelegate.swift */,
+				0F58B7DF1CA3322F003E9B6F /* DetailViewController.swift */,
+				0F58B7E11CA3322F003E9B6F /* Main.storyboard */,
+				0F58B7E41CA3322F003E9B6F /* Assets.xcassets */,
+				0F58B7E61CA3322F003E9B6F /* LaunchScreen.storyboard */,
+				0F58B7E91CA3322F003E9B6F /* Info.plist */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +302,9 @@
 			files = (
 				0F58B7E01CA3322F003E9B6F /* DetailViewController.swift in Sources */,
 				0F58B7DE1CA3322F003E9B6F /* CollapsibleTableViewController.swift in Sources */,
+				0F6151551CAABF2400128A9D /* Utils.swift in Sources */,
+				0F61514F1CAABDFF00128A9D /* CollapsibleTableViewCell.swift in Sources */,
+				0F61514D1CAABCAE00128A9D /* Setting.swift in Sources */,
 				0F58B7DC1CA3322F003E9B6F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
