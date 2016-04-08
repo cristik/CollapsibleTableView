@@ -8,10 +8,12 @@
 
 import UIKit
 
+typealias CollapsibleTableViewCellViewModel = (title: String, indentationLevel: Int)
+
 class CollapsibleTableViewCell: UITableViewCell {
     
 
-    func configure(viewModel: SettingViewModel) {
+    func configure(viewModel: CollapsibleTableViewCellViewModel) {
         selectionStyle = .None
         textLabel?.text = viewModel.title
         indentationWidth = 20

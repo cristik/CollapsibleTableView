@@ -32,3 +32,9 @@ class SettingViewModel: NSObject {
         }
     }
 }
+
+extension SettingViewModel {
+    var collapsibleTableViewCellModel: CollapsibleTableViewCellViewModel {
+        return (title: title, indentationLevel: indentationLevel)
+    }
+}

@@ -51,7 +51,7 @@ class CollapsibleTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCellWithIdentifier("CollapsibleTableViewCell", forIndexPath: indexPath) as? CollapsibleTableViewCell) ?? CollapsibleTableViewCell()
         let setting = listViewModel.settingAtIndex(indexPath.row)
-        cell.configure(setting)
+        cell.configure(setting.collapsibleTableViewCellModel)
         return cell
     }
     
