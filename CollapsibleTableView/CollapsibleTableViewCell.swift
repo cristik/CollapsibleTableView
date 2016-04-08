@@ -10,11 +10,12 @@ import UIKit
 
 class CollapsibleTableViewCell: UITableViewCell {
     
-    func configure(title: String, imageName: String?, hasChildren: Bool) {
+
+    func configure(viewModel: SettingViewModel) {
         selectionStyle = .None
-        textLabel?.text = title
+        textLabel?.text = viewModel.title
         indentationWidth = 20
-        indentationLevel = hasChildren ? 0 : 1
+        indentationLevel = viewModel.indentationLevel
     }
 
     override func awakeFromNib() {

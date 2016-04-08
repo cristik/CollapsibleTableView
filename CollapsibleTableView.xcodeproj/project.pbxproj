@@ -18,6 +18,8 @@
 		0F61514D1CAABCAE00128A9D /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61514C1CAABCAE00128A9D /* Setting.swift */; };
 		0F61514F1CAABDFF00128A9D /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61514E1CAABDFF00128A9D /* CollapsibleTableViewCell.swift */; };
 		0F6151551CAABF2400128A9D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6151541CAABF2400128A9D /* Utils.swift */; };
+		CD179CF81CB29D8A0096F265 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD179CF71CB29D8A0096F265 /* SettingViewModel.swift */; };
+		CD6F327A1CB7AB2A0062A7BC /* SettingsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6F32791CB7AB2A0062A7BC /* SettingsListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		0F61514C1CAABCAE00128A9D /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		0F61514E1CAABDFF00128A9D /* CollapsibleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewCell.swift; sourceTree = "<group>"; };
 		0F6151541CAABF2400128A9D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		CD179CF71CB29D8A0096F265 /* SettingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		CD6F32791CB7AB2A0062A7BC /* SettingsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 			children = (
 				0F6151501CAABE1000128A9D /* Model */,
 				0F6151511CAABE1600128A9D /* View */,
+				CD179CF61CB29D2B0096F265 /* ViewModel */,
 				0F6151521CAABE1A00128A9D /* Controller */,
 				0F6151531CAABE3500128A9D /* Other */,
 			);
@@ -167,6 +172,15 @@
 				0F58B7E91CA3322F003E9B6F /* Info.plist */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		CD179CF61CB29D2B0096F265 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD179CF71CB29D8A0096F265 /* SettingViewModel.swift */,
+				CD6F32791CB7AB2A0062A7BC /* SettingsListViewModel.swift */,
+			);
+			name = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +320,8 @@
 				0F61514F1CAABDFF00128A9D /* CollapsibleTableViewCell.swift in Sources */,
 				0F61514D1CAABCAE00128A9D /* Setting.swift in Sources */,
 				0F58B7DC1CA3322F003E9B6F /* AppDelegate.swift in Sources */,
+				CD179CF81CB29D8A0096F265 /* SettingViewModel.swift in Sources */,
+				CD6F327A1CB7AB2A0062A7BC /* SettingsListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

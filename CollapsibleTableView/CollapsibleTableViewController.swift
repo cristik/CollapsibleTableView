@@ -11,26 +11,10 @@ import UIKit
 class CollapsibleTableViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    var settings = [
-        Setting(name:"General", subsettings: [
-            Setting(name:"Appearance")]),
-        Setting(name: "Account", subsettings: [
-            Setting(name: "Profile"),
-            Setting(name: "Password"),
-            Setting(name: "Other")]),
-        Setting(name: "Favorites", subsettings: [
-            Setting(name: "Manage")]
-        )
-    ]
-    
-    // workaround
-    var expandedSettings = [Setting]()
-    var actualSettings = [Setting]()
-    var images = [Setting:UIImage]()
+    let listViewModel = SettingsListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        actualSettings = settings
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -46,21 +30,12 @@ class CollapsibleTableViewController: UITableViewController {
     }
     
     func reloadData() {
-        let previousSettings = actualSettings
-        actualSettings = settings.reduce([Setting]()) {
-            var result = $0
-            result.append($1)
-            if expandedSettings.indexOf($1) != nil {
-                result.appendContentsOf($1.subsettings)
-            }
-            return result
-        }
-        let diffe = diff(previousSettings, other: actualSettings)
+        let diffe = listViewModel.reloadSettings()
+
         tableView.beginUpdates()
         tableView.insertRowsAtIndexPaths(diffe.added.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
         tableView.deleteRowsAtIndexPaths(diffe.deleted.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
         tableView.endUpdates()
-        //tableView.reloadData()
     }
 
     // MARK: - Table View
@@ -70,23 +45,18 @@ class CollapsibleTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return actualSettings.count
+        return listViewModel.numberOfSettings()
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCellWithIdentifier("CollapsibleTableViewCell", forIndexPath: indexPath) as? CollapsibleTableViewCell) ?? CollapsibleTableViewCell()
-        let setting = actualSettings[indexPath.row]
-        cell.configure(setting.name, imageName: setting.imageName, hasChildren: setting.subsettings.count > 0)        
+        let setting = listViewModel.settingAtIndex(indexPath.row)
+        cell.configure(setting)
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let setting = actualSettings[indexPath.row]
-        if let idx = expandedSettings.indexOf(setting) {
-            expandedSettings.removeAtIndex(idx)
-        } else {
-            expandedSettings.append(setting);
-        }
+        listViewModel.toogleExpansionStatusOfSettingAtIndex(indexPath.row)
         reloadData()
     }
 
