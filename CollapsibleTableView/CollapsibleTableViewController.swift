@@ -11,14 +11,29 @@ import UIKit
 class CollapsibleTableViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    let listViewModel = SettingsListViewModel()
+    var actualSettings = [
+        Setting(name:"General", subsettings: [
+            Setting(name:"Appearance")]),
+        Setting(name: "Account", subsettings: [
+            Setting(name: "Profile"),
+            Setting(name: "Password"),
+            Setting(name: "Other")]),
+        Setting(name: "Favorites", subsettings: [
+            Setting(name: "Manage")]
+        )
+        ].flatMap { SettingViewModel(setting: $0) }
+    var flatSettings = [SettingViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        flatSettings = actualSettings
+
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+
         // TODO: view model holding the cell class, in case we have two types of cells
         // TODO: awesome registration from articles, with enums
         tableView.registerClass(CollapsibleTableViewCell.self, forCellReuseIdentifier: "CollapsibleTableViewCell")
@@ -30,7 +45,9 @@ class CollapsibleTableViewController: UITableViewController {
     }
     
     func reloadData() {
-        let diffe = listViewModel.reloadSettings()
+        let oldFlatSettings = flatSettings
+        flatSettings = actualSettings.flatMap{ $0.flatSettings() }
+        let diffe = diff(oldFlatSettings, other: flatSettings)
 
         tableView.beginUpdates()
         tableView.insertRowsAtIndexPaths(diffe.added.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
@@ -45,18 +62,18 @@ class CollapsibleTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listViewModel.numberOfSettings()
+        return flatSettings.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCellWithIdentifier("CollapsibleTableViewCell", forIndexPath: indexPath) as? CollapsibleTableViewCell) ?? CollapsibleTableViewCell()
-        let setting = listViewModel.settingAtIndex(indexPath.row)
+        let setting = flatSettings[indexPath.row]
         cell.configure(setting.collapsibleTableViewCellModel)
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        listViewModel.toogleExpansionStatusOfSettingAtIndex(indexPath.row)
+        flatSettings[indexPath.row].toggleExpansionStatus()
         reloadData()
     }
 

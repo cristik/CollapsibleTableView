@@ -11,25 +11,32 @@ import UIKit
 class SettingViewModel: NSObject {
     let setting: Setting
 
-    var title: String = ""
-    var image: UIImage?
-    var subsettings: [SettingViewModel] = []
-
-    var expanded: Bool = false
+    var title: String {
+        return setting.name
+    }
+    var image: UIImage? {
+        return UIImage(named: setting.imageName ?? "")
+    }
+    var subsettings = [SettingViewModel]()
+    var expanded: Bool = false {
+        didSet {
+            subsettings = expanded ? setting.subsettings.map{ SettingViewModel(setting: $0, indentationLevel: self.indentationLevel+1) } : []
+        }
+    }
     var indentationLevel: Int = 0
 
     init(setting: Setting, indentationLevel: Int = 0) {
         self.setting = setting
-        self.title = setting.name
         self.indentationLevel = indentationLevel
+    }
 
-        if let imageName = setting.imageName {
-            image = UIImage(named: imageName)
-        }
+    func flatSettings() -> [SettingViewModel] {
+        let expandedSubsettings = expanded ? subsettings : [SettingViewModel]()
+        return [self] + expandedSubsettings.flatMap { $0.flatSettings() }
+    }
 
-        subsettings = setting.subsettings.map {
-            SettingViewModel(setting: $0, indentationLevel: indentationLevel + 1)
-        }
+    func toggleExpansionStatus() {
+        expanded = !expanded
     }
 }
 

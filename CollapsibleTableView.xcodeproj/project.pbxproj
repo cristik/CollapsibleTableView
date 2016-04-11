@@ -19,9 +19,7 @@
 		0F61514F1CAABDFF00128A9D /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61514E1CAABDFF00128A9D /* CollapsibleTableViewCell.swift */; };
 		0F6151551CAABF2400128A9D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6151541CAABF2400128A9D /* Utils.swift */; };
 		CD179CF81CB29D8A0096F265 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD179CF71CB29D8A0096F265 /* SettingViewModel.swift */; };
-		CD6F327A1CB7AB2A0062A7BC /* SettingsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6F32791CB7AB2A0062A7BC /* SettingsListViewModel.swift */; };
 		CD6F327C1CB7B5C00062A7BC /* SettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6F327B1CB7B5C00062A7BC /* SettingViewModelTests.swift */; };
-		CD6F327E1CB7B5D50062A7BC /* SettingsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6F327D1CB7B5D50062A7BC /* SettingsListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +58,7 @@
 		0F61514E1CAABDFF00128A9D /* CollapsibleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewCell.swift; sourceTree = "<group>"; };
 		0F6151541CAABF2400128A9D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		CD179CF71CB29D8A0096F265 /* SettingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
-		CD6F32791CB7AB2A0062A7BC /* SettingsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListViewModel.swift; sourceTree = "<group>"; };
 		CD6F327B1CB7B5C00062A7BC /* SettingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewModelTests.swift; sourceTree = "<group>"; };
-		CD6F327D1CB7B5D50062A7BC /* SettingsListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,9 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				0F58B7F21CA3322F003E9B6F /* CollapsibleTableViewTests.swift */,
-				0F58B7F41CA3322F003E9B6F /* Info.plist */,
 				CD6F327B1CB7B5C00062A7BC /* SettingViewModelTests.swift */,
-				CD6F327D1CB7B5D50062A7BC /* SettingsListViewModelTests.swift */,
+				0F58B7F41CA3322F003E9B6F /* Info.plist */,
 			);
 			path = CollapsibleTableViewTests;
 			sourceTree = "<group>";
@@ -184,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				CD179CF71CB29D8A0096F265 /* SettingViewModel.swift */,
-				CD6F32791CB7AB2A0062A7BC /* SettingsListViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -327,7 +321,6 @@
 				0F61514D1CAABCAE00128A9D /* Setting.swift in Sources */,
 				0F58B7DC1CA3322F003E9B6F /* AppDelegate.swift in Sources */,
 				CD179CF81CB29D8A0096F265 /* SettingViewModel.swift in Sources */,
-				CD6F327A1CB7AB2A0062A7BC /* SettingsListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,7 +328,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD6F327E1CB7B5D50062A7BC /* SettingsListViewModelTests.swift in Sources */,
 				0F58B7F31CA3322F003E9B6F /* CollapsibleTableViewTests.swift in Sources */,
 				CD6F327C1CB7B5C00062A7BC /* SettingViewModelTests.swift in Sources */,
 			);
