@@ -48,7 +48,7 @@ class CollapsibleTableViewController: UITableViewController {
         let oldFlatSettings = flatSettings
         flatSettings = actualSettings.flatMap{ $0.flatSettings() }
         let diffe = diff(oldFlatSettings, other: flatSettings)
-
+        
         tableView.beginUpdates()
         tableView.insertRowsAtIndexPaths(diffe.added.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
         tableView.deleteRowsAtIndexPaths(diffe.deleted.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
@@ -68,7 +68,7 @@ class CollapsibleTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCellWithIdentifier("CollapsibleTableViewCell", forIndexPath: indexPath) as? CollapsibleTableViewCell) ?? CollapsibleTableViewCell()
         let setting = flatSettings[indexPath.row]
-        cell.configure(setting.collapsibleTableViewCellModel)
+        cell.configure(setting)
         return cell
     }
     
