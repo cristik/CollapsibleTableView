@@ -10,7 +10,7 @@ import UIKit
 
 class CollapsibleTableViewCell: UITableViewCell {
     
-    func configure(title: String, imageName: String?, hasChildren: Bool) {
+    func configure(title: String, image: UIImage?, hasChildren: Bool) {
         selectionStyle = .None
         textLabel?.text = title
         indentationWidth = 20

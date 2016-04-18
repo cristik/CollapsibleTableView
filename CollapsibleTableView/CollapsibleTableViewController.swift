@@ -8,9 +8,8 @@
 
 import UIKit
 
-class CollapsibleTableViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
+class CollapsibleTableViewController: UITableViewController {
     var settings = [
         Setting(name:"General", subsettings: [
             Setting(name:"Appearance")]),
@@ -22,28 +21,12 @@ class CollapsibleTableViewController: UITableViewController {
             Setting(name: "Manage")]
         )
     ]
-    
-    // workaround
-    var expandedSettings = [Setting]()
+    // flat list of visible settings, for the table view data source
     var actualSettings = [Setting]()
+    //setting images
     var images = [Setting:UIImage]()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        actualSettings = settings
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
-        // TODO: view model holding the cell class, in case we have two types of cells
-        // TODO: awesome registration from articles, with enums
-        tableView.registerClass(CollapsibleTableViewCell.self, forCellReuseIdentifier: "CollapsibleTableViewCell")
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
-        super.viewWillAppear(animated)
-    }
+    // list of expanded settings
+    var expandedSettings = [Setting]()
     
     func reloadData() {
         let previousSettings = actualSettings
@@ -60,7 +43,26 @@ class CollapsibleTableViewController: UITableViewController {
         tableView.insertRowsAtIndexPaths(diffe.added.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
         tableView.deleteRowsAtIndexPaths(diffe.deleted.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
         tableView.endUpdates()
-        //tableView.reloadData()
+    }
+    
+    
+    var detailViewController: DetailViewController? = nil
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        actualSettings = settings
+        if let split = self.splitViewController {
+            let controllers = split.viewControllers
+            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+        }
+        // TODO: view model holding the cell class, in case we have two types of cells
+        // TODO: awesome registration from articles, with enums
+        tableView.registerClass(CollapsibleTableViewCell.self, forCellReuseIdentifier: "CollapsibleTableViewCell")
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        super.viewWillAppear(animated)
     }
 
     // MARK: - Table View
