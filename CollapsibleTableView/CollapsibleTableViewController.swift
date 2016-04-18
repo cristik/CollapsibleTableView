@@ -10,8 +10,7 @@ import UIKit
 
 class CollapsibleTableViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
-    var actualSettings = [
+    var settings  = [
         Setting(name:"General", subsettings: [
             Setting(name:"Appearance")]),
         Setting(name: "Account", subsettings: [
@@ -21,13 +20,28 @@ class CollapsibleTableViewController: UITableViewController {
         Setting(name: "Favorites", subsettings: [
             Setting(name: "Manage")]
         )
-        ].flatMap { SettingViewModel(setting: $0) }
-    var flatSettings = [SettingViewModel]()
+        ].map { SettingViewModel(setting: $0) }
+
+    // flat list of visible settings, for the table view data source
+    var actualSettings = [SettingViewModel]()
+
+    func reloadData() {
+        let previousSettings = actualSettings
+        actualSettings = settings.flatMap{ $0.flatSettings() }
+
+        let diffe = diff(previousSettings, other: actualSettings)
+        tableView.beginUpdates()
+        tableView.insertRowsAtIndexPaths(diffe.added.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
+        tableView.deleteRowsAtIndexPaths(diffe.deleted.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
+        tableView.endUpdates()
+    }
+
+    var detailViewController: DetailViewController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        flatSettings = actualSettings
+        actualSettings = settings
 
         if let split = self.splitViewController {
             let controllers = split.viewControllers
@@ -43,17 +57,6 @@ class CollapsibleTableViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
     }
-    
-    func reloadData() {
-        let oldFlatSettings = flatSettings
-        flatSettings = actualSettings.flatMap{ $0.flatSettings() }
-        let diffe = diff(oldFlatSettings, other: flatSettings)
-        
-        tableView.beginUpdates()
-        tableView.insertRowsAtIndexPaths(diffe.added.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
-        tableView.deleteRowsAtIndexPaths(diffe.deleted.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
-        tableView.endUpdates()
-    }
 
     // MARK: - Table View
 
@@ -62,18 +65,17 @@ class CollapsibleTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return flatSettings.count
+        return actualSettings.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCellWithIdentifier("CollapsibleTableViewCell", forIndexPath: indexPath) as? CollapsibleTableViewCell) ?? CollapsibleTableViewCell()
-        let setting = flatSettings[indexPath.row]
-        cell.configure(setting)
+        cell.configure(actualSettings[indexPath.row])
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        flatSettings[indexPath.row].toggleExpansionStatus()
+        actualSettings[indexPath.row].toggleExpansionStatus()
         reloadData()
     }
 

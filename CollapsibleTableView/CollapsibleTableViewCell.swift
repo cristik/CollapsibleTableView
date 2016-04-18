@@ -9,24 +9,21 @@
 import UIKit
 
 class CollapsibleTableViewCell: UITableViewCell {
-    
+
+    func configure(title: String, image: UIImage? = nil, indentationLevel: Int = 0) {
+        selectionStyle = .None
+        textLabel?.text = title
+        imageView?.image = image
+        indentationWidth = 20
+        self.indentationLevel = indentationLevel
+    }
+
+}
+
+extension CollapsibleTableViewCell {
 
     func configure(viewModel: SettingViewModel) {
-        selectionStyle = .None
-        textLabel?.text = viewModel.title
-        indentationWidth = 20
-        indentationLevel = viewModel.indentationLevel
+        configure(viewModel.title, image: viewModel.image,
+                  indentationLevel: viewModel.indentationLevel)
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
