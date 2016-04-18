@@ -20,19 +20,20 @@ class CollapsibleTableViewController: UITableViewController {
         Setting(name: "Favorites", subsettings: [
             Setting(name: "Manage")]
         )
-        ].map { SettingViewModel(setting: $0) }
+        ]
+    var viewModels = [SettingViewModel]()
 
     // flat list of visible settings, for the table view data source
     var actualSettings = [SettingViewModel]()
 
     func reloadData() {
         let previousSettings = actualSettings
-        actualSettings = settings.flatMap{ $0.flatSettings() }
+        actualSettings = viewModels.flatMap{ $0.flatSettings() }
 
-        let diffe = diff(previousSettings, other: actualSettings)
+        let diff = previousSettings.diff(actualSettings)
         tableView.beginUpdates()
-        tableView.insertRowsAtIndexPaths(diffe.added.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
-        tableView.deleteRowsAtIndexPaths(diffe.deleted.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
+        tableView.insertRowsAtIndexPaths(diff.added.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
+        tableView.deleteRowsAtIndexPaths(diff.deleted.map { NSIndexPath(forRow: $0, inSection: 0) }, withRowAnimation: .Automatic)
         tableView.endUpdates()
     }
 
@@ -41,7 +42,8 @@ class CollapsibleTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        actualSettings = settings
+        viewModels = settings.map { SettingViewModel(setting: $0) }
+        actualSettings = viewModels
 
         if let split = self.splitViewController {
             let controllers = split.viewControllers
@@ -75,8 +77,10 @@ class CollapsibleTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        actualSettings[indexPath.row].toggleExpansionStatus()
-        reloadData()
+        if let index = viewModels.indexOf(actualSettings[indexPath.row]) {
+            viewModels[index].toggleExpansionStatus()
+            reloadData()
+        }
     }
 
     // MARK: - Segues

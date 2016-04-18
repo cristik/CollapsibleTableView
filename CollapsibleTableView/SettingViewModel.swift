@@ -8,34 +8,36 @@
 
 import UIKit
 
-class SettingViewModel: NSObject {
+struct SettingViewModel: Equatable {
     let setting: Setting
-
-    var title: String {
-        return setting.name
-    }
-    var image: UIImage? {
-        return UIImage(named: setting.imageName ?? "")
-    }
-    var subsettings = [SettingViewModel]()
-    var expanded: Bool = false {
-        didSet {
-            subsettings = expanded ? setting.subsettings.map{ SettingViewModel(setting: $0, indentationLevel: self.indentationLevel+1) } : []
-        }
-    }
-    var indentationLevel: Int = 0
+    var _indentationLevel: Int = 0
+    var expanded: Bool = false
 
     init(setting: Setting, indentationLevel: Int = 0) {
         self.setting = setting
-        self.indentationLevel = indentationLevel
+        self._indentationLevel = indentationLevel
     }
 
     func flatSettings() -> [SettingViewModel] {
-        let expandedSubsettings = expanded ? subsettings : [SettingViewModel]()
+        let expandedSubsettings = expanded ? setting.subsettings.map { SettingViewModel(setting: $0, indentationLevel: _indentationLevel + 1) } : [SettingViewModel]()
         return [self] + expandedSubsettings.flatMap { $0.flatSettings() }
     }
 
-    func toggleExpansionStatus() {
+    mutating func toggleExpansionStatus() {
         expanded = !expanded
+    }
+}
+
+func ==(lhs: SettingViewModel, rhs: SettingViewModel) -> Bool {
+    return lhs.setting === rhs.setting
+}
+
+extension SettingViewModel: CollapsibleTableViewCellDataSource {
+    func title() -> String {
+        return setting.name
+    }
+        
+    func indentationLevel() -> Int {
+        return _indentationLevel
     }
 }

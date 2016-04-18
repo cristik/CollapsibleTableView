@@ -8,22 +8,16 @@
 
 import UIKit
 
-class CollapsibleTableViewCell: UITableViewCell {
-
-    func configure(title: String, image: UIImage? = nil, indentationLevel: Int = 0) {
-        selectionStyle = .None
-        textLabel?.text = title
-        imageView?.image = image
-        indentationWidth = 20
-        self.indentationLevel = indentationLevel
-    }
-
+protocol CollapsibleTableViewCellDataSource {
+    func title() -> String
+    func indentationLevel() -> Int
 }
 
-extension CollapsibleTableViewCell {
-
-    func configure(viewModel: SettingViewModel) {
-        configure(viewModel.title, image: viewModel.image,
-                  indentationLevel: viewModel.indentationLevel)
+class CollapsibleTableViewCell: UITableViewCell {
+    func configure(dataSource: CollapsibleTableViewCellDataSource) {
+        selectionStyle = .None
+        textLabel?.text = dataSource.title()
+        indentationWidth = 20
+        indentationLevel = dataSource.indentationLevel()
     }
 }
