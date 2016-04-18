@@ -8,7 +8,10 @@
 
 import Foundation
 
-func diff<Element>(array: [Element], other: [Element], equals: (Element, Element) -> Bool) -> (added: [Int], deleted: [Int], moved: [(from: Int, to: Int)]) {
+typealias ArrayDiff = (added: [Int], deleted: [Int], moved: [(from: Int, to: Int)])
+
+func diff<Element>(array: [Element], other: [Element],
+          equals: (Element, Element) -> Bool) -> ArrayDiff {
     var added: [Int] = []
     var deleted: [Int] = []
     var moved: [(from: Int, to: Int)] = []
@@ -30,10 +33,9 @@ func diff<Element>(array: [Element], other: [Element], equals: (Element, Element
 }
 
 
-func diff<Element: Equatable>(array: [Element], other: [Element]) -> (added: [Int], deleted: [Int], moved: [(from: Int, to: Int)]) {
-    return diff(array, other: other, equals: ==)
+func diff(array: [Setting], other: [Setting]) -> ArrayDiff {
+    return diff(array, other: other){ $0 === $1}
 }
-
 
 //func diff<Element: AnyObject>(array: [Element], array: [Element], other: [Element]) -> (added: [Int], deleted: [Int], moved: [(from: Int, to: Int)]) {
 //    return diff(array, other: other, equals: ===)
